@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz cumpleaños, Valery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#2b1b2e;
+    --plum-dark:#1c1120;
+    --gold:#c9a15e;
+    --blush:#e8b4bc;
+    --rose:#d17b95;
+    --cream:#f6ede1;
+    --lilac:#b9a3d9;
+    --lilac-soft:#d9cdec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--plum-dark);
+    color:var(--cream);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  .section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 6vw;
+    position:relative;
+    text-align:center;
+  }
+ 
+  /* ---------- HERO ---------- */
+  #hero{
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(201,161,94,0.15), transparent 60%),
+      linear-gradient(180deg, var(--plum-dark) 0%, var(--plum) 100%);
+  }
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 0.2s;
+  }
+  .hero-name{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:clamp(56px,12vw,140px);
+    line-height:0.95;
+    letter-spacing:0.01em;
+    color:var(--cream);
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 0.5s;
+  }
+  .hero-age{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(20px,3vw,28px);
+    color:var(--lilac-soft);
+    margin-top:14px;
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 0.9s;
+  }
+  .candles{
+    display:flex;
+    gap:10px;
+    margin-top:40px;
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 1.3s;
+  }
+  .candle-flame{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 8px 2px rgba(201,161,94,0.7);
+    animation:flicker 2.4s ease-in-out infinite;
+  }
+  .candle-flame:nth-child(odd){animation-delay:0.3s;}
+  .candle-flame:nth-child(3n){animation-delay:0.6s;}
+  @keyframes flicker{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:0.6;transform:scale(0.8);}
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom:48px;
+    font-size:12px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:rgba(246,237,225,0.5);
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.8s;
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(16px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+ 
+  /* ---------- SECTION HEADERS ---------- */
+  .section-eyebrow{
+    font-size:12px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:16px;
+  }
+  .section-title{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:clamp(32px,5vw,52px);
+    margin-bottom:48px;
+    color:var(--cream);
+  }
+ 
+  /* ---------- CARTA ---------- */
+  #carta{background:var(--plum);}
+  .carta-box{
+    max-width:620px;
+    background:rgba(246,237,225,0.04);
+    border:1px solid rgba(201,161,94,0.35);
+    border-radius:2px;
+    padding:52px 44px;
+    text-align:left;
+  }
+  .carta-box p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(18px,2.4vw,22px);
+    line-height:1.75;
+    color:var(--cream);
+    margin-bottom:22px;
+  }
+  .carta-firma{
+    font-style:italic;
+    color:var(--lilac-soft);
+    margin-top:12px;
+    text-align:right;
+  }
+ 
+  /* ---------- FOTOS ---------- */
+  #fotos{background:var(--plum-dark);}
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    max-width:900px;
+    width:100%;
+  }
+  .photo-slot{
+    aspect-ratio:1/1;
+    background:rgba(246,237,225,0.05);
+    border:1px dashed rgba(201,161,94,0.4);
+    border-radius:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .photo-slot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .photo-slot span{
+    font-size:12px;
+    letter-spacing:0.1em;
+    color:rgba(246,237,225,0.35);
+    text-transform:uppercase;
+  }
+  @media (max-width:640px){
+    .gallery{grid-template-columns:repeat(2,1fr);}
+  }
+ 
+  /* ---------- MUSICA ---------- */
+  #musica{background:var(--plum);}
+  .music-card{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    background:rgba(246,237,225,0.04);
+    border:1px solid rgba(201,161,94,0.35);
+    padding:28px 36px;
+    max-width:520px;
+    width:100%;
+  }
+  .vinyl{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:radial-gradient(circle at center, var(--plum-dark) 0 8px, var(--gold) 9px 10px, var(--plum-dark) 11px 100%);
+    flex-shrink:0;
+    animation:spin 6s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .music-text{text-align:left;}
+  .music-text .song{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--cream);
+  }
+  .music-text .artist{
+    font-size:13px;
+    color:rgba(246,237,225,0.6);
+    margin-top:4px;
+  }
+ 
+  /* ---------- ELECCION ---------- */
+  #eleccion{background:var(--plum-dark);}
+  .choice-sub{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(17px,2.2vw,20px);
+    color:rgba(246,237,225,0.75);
+    max-width:480px;
+    margin-bottom:36px;
+  }
+  .choice-row{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .choice-btn{
+    font-family:'Jost',sans-serif;
+    font-size:13px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--cream);
+    background:transparent;
+    border:1px solid var(--lilac);
+    padding:16px 34px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .choice-btn:hover{
+    background:var(--lilac);
+    color:var(--plum-dark);
+    transform:translateY(-2px);
+  }
+  .choice-response{
+    margin-top:32px;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(18px,2.4vw,22px);
+    color:var(--lilac-soft);
+    opacity:0;
+    transition:opacity 0.5s ease;
+    min-height:28px;
+  }
+  .choice-response.show{opacity:1;}
+ 
+  /* ---------- CIERRE ---------- */
+  #cierre{
+    background:linear-gradient(180deg, var(--plum) 0%, var(--plum-dark) 100%);
+  }
+  .cierre-msg{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(24px,3.6vw,36px);
+    max-width:640px;
+    line-height:1.5;
+    color:var(--cream);
+    margin-bottom:36px;
+  }
+  .btn{
+    display:inline-block;
+    font-family:'Jost',sans-serif;
+    font-size:13px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--plum-dark);
+    background:var(--gold);
+    padding:16px 38px;
+    border:none;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform 0.3s ease, background 0.3s ease;
+    text-decoration:none;
+  }
+  .btn:hover{
+    background:var(--blush);
+    transform:translateY(-2px);
+  }
+</style>
+</head>
+<body>
+ 
+<section id="hero" class="section">
+  <div class="eyebrow">21 · 07</div>
+  <h1 class="hero-name">Valery</h1>
+  <div class="hero-age">22 años de ti</div>
+  <div class="candles">
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+  </div>
+  <div class="scroll-hint">desliza ↓</div>
+</section>
+ 
+<section id="carta" class="section">
+  <div class="section-eyebrow">Para ti</div>
+  <h2 class="section-title">Una carta</h2>
+  <div class="carta-box">
+    <p>Valery,</p>
+    <p>Hoy es tu día, y aunque las cosas entre nosotros ya no son como antes, no podía dejar pasar tu cumpleaños sin decirte lo que siento. Cumplir 22 es motivo de celebración, y quiero que sepas que, estés donde estés, te deseo lo mejor del mundo.</p>
+    <p>Han pasado cosas, nos hemos alejado, pero pienso en los momentos que compartimos y en todo lo bueno que construimos juntos. Te sigo queriendo, y si me das la oportunidad, me encantaría reconstruir lo que tuvimos, con más paciencia, más honestidad y más ganas de cuidarte como mereces.</p>
+    <p>No te pido nada a cambio de esta carta, solo que sepas que hoy, más que nunca, mi cariño por ti sigue intacto.</p>
+    <p class="carta-firma">Con todo mi cariño.</p>
+  </div>
+</section>
+ 
+<section id="fotos" class="section">
+  <div class="section-eyebrow">Recuerdos</div>
+  <h2 class="section-title">Nosotros</h2>
+  <div class="gallery">
+    <div class="photo-slot"><img src="imagen/mor.jpeg"></div>
+    <div class="photo-slot"><span>Foto 2</span></div>
+    <div class="photo-slot"><span>Foto 3</span></div>
+    <div class="photo-slot"><span>Foto 4</span></div>
+    <div class="photo-slot"><span>Foto 5</span></div>
+    <div class="photo-slot"><span>Foto 6</span></div>
+  </div>
+</section>
+ 
+<section id="musica" class="section">
+  <div class="section-eyebrow">Nuestra canción</div>
+  <h2 class="section-title">Una melodía</h2>
+  <div class="music-card">
+    <div class="video-wrap">
+      <iframe allow="autoplay *; encrypted-media *; clipboard-write" frameborder="0" height="175" style="width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/ar/song/imu/1871540989"></iframe>
+    </div>
+    <div class="music-info">
+      <div class="vinyl"></div>
+      <div class="music-text">
+        <div class="song">Nombre de la canción</div>
+        <div class="artist">Artista — reemplaza este texto</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="eleccion" class="section">
+  <div class="section-eyebrow">Si tú quieres</div>
+  <h2 class="section-title">Me encantaría verte</h2>
+  <p class="choice-sub">No hay presión, solo dime qué se te antoja más para celebrar tu cumpleaños.</p>
+  <div class="choice-row">
+    <button class="choice-btn" onclick="elegir('cena')">Una cena</button>
+    <button class="choice-btn" onclick="elegir('llamada')">Una videollamada</button>
+  </div>
+  <div class="choice-response" id="choice-response"></div>
+</section>
+ 
+<section id="cierre" class="section">
+  <p class="cierre-msg">Feliz cumpleaños, Valery.<br>Que este nuevo año te encuentre feliz, y ojalá, feliz junto a mí.</p>
+  <a class="btn" href="#hero">Volver a empezar</a>
+</section>
+ 
+<script>
+  function elegir(tipo){
+    var el = document.getElementById('choice-response');
+    var mensajes = {
+      cena: 'Perfecto, te escribo para coordinar el lugar y la hora.',
+      llamada: 'Perfecto, te escribo para ponernos de acuerdo en la hora.'
+    };
+    el.textContent = mensajes[tipo];
+    el.classList.add('show');
+  }
+</script>
+</body>
+</html>

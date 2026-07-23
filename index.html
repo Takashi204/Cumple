@@ -219,7 +219,22 @@
   .flower-cluster .carta-flower.f2{top:26px;left:0;width:36px;transform:rotate(-24deg);z-index:2;}
   .flower-cluster .carta-flower.f3{top:34px;left:38px;width:34px;transform:rotate(10deg);z-index:1;}
   @media (max-width:900px){
-    .flower-cluster.left-out, .flower-cluster.right-out{display:none;}
+    .flower-cluster{width:64px;height:64px;}
+    .flower-cluster.left-out{
+      left:50%;
+      top:-38px;
+      transform:translateX(-50%) rotate(-90deg);
+    }
+    .flower-cluster.right-out{
+      right:auto;
+      left:50%;
+      top:auto;
+      bottom:-38px;
+      transform:translateX(-50%) rotate(90deg) scaleX(-1);
+    }
+  }
+  @media (max-width:420px){
+    .flower-cluster{width:52px;height:52px;}
   }
  
   /* ---------- PETALOS ---------- */
@@ -458,7 +473,7 @@
 <div class="petals" id="petals"></div>
  
 <section id="hero" class="section">
-  <div class="eyebrow">21 · 07</div>
+  <div class="eyebrow">10 · 12</div>
   <div class="hero-wreath">
     <div class="wreath-rose left">
       <svg width="50" height="68" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">

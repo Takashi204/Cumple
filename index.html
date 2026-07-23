@@ -41,8 +41,32 @@
   /* ---------- HERO ---------- */
   #hero{
     background:
+      radial-gradient(ellipse at 50% 0%, rgba(185,163,217,0.14), transparent 55%),
       radial-gradient(ellipse at 50% 20%, rgba(201,161,94,0.15), transparent 60%),
       linear-gradient(180deg, var(--plum-dark) 0%, var(--plum) 100%);
+    overflow:hidden;
+  }
+  .stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+  }
+  .star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:var(--lilac-soft);
+    animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.15;}
+    50%{opacity:0.9;}
+  }
+  #hero > *:not(.stars){
+    position:relative;
+    z-index:1;
   }
   .eyebrow{
     font-size:13px;
@@ -106,6 +130,121 @@
   @keyframes fadeUp{
     from{opacity:0;transform:translateY(16px);}
     to{opacity:1;transform:translateY(0);}
+  }
+ 
+  .hero-wreath{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px 70px;
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 0.5s;
+  }
+  .hero-wreath .hero-name{opacity:1;animation:none;}
+  .wreath-rose{
+    position:absolute;
+  }
+  .wreath-rose svg{display:block;filter:drop-shadow(0 0 8px rgba(185,163,217,0.75));}
+  .wreath-rose.left{
+    left:-6px;
+    top:50%;
+    transform:translateY(-50%) rotate(-18deg);
+    width:56px;
+  }
+  .wreath-rose.right{
+    right:-6px;
+    top:50%;
+    transform:translateY(-50%) rotate(18deg) scaleX(-1);
+    width:56px;
+  }
+  .wreath-rose.top-left{
+    left:34px;
+    top:-6px;
+    width:30px;
+    transform:rotate(-25deg);
+    opacity:0.75;
+  }
+  .wreath-rose.top-right{
+    right:34px;
+    top:-6px;
+    width:30px;
+    transform:rotate(25deg) scaleX(-1);
+    opacity:0.75;
+  }
+  .wreath-rose.bottom-left{
+    left:34px;
+    bottom:-6px;
+    width:30px;
+    transform:rotate(25deg);
+    opacity:0.75;
+  }
+  .wreath-rose.bottom-right{
+    right:34px;
+    bottom:-6px;
+    width:30px;
+    transform:rotate(-25deg) scaleX(-1);
+    opacity:0.75;
+  }
+  @media (max-width:640px){
+    .hero-wreath{padding:16px 40px;}
+    .wreath-rose.left, .wreath-rose.right{width:36px;}
+    .wreath-rose.top-left, .wreath-rose.top-right, .wreath-rose.bottom-left, .wreath-rose.bottom-right{display:none;}
+  }
+ 
+  .carta-box{position:relative;}
+  .carta-corner{
+    position:absolute;
+    width:54px;
+    height:54px;
+    opacity:0.55;
+  }
+  .carta-corner svg{width:100%;height:100%;}
+  .carta-corner.tl{top:-14px;left:-14px;}
+  .carta-corner.br{bottom:-14px;right:-14px;transform:rotate(180deg);}
+  .carta-flower{
+    position:absolute;
+    filter:drop-shadow(0 0 8px rgba(185,163,217,0.75));
+  }
+  .carta-flower svg{display:block;}
+  .flower-cluster{
+    position:absolute;
+    top:50%;
+    width:90px;
+    height:90px;
+  }
+  .flower-cluster.left-out{left:-85px;transform:translateY(-50%);}
+  .flower-cluster.right-out{right:-85px;transform:translateY(-50%) scaleX(-1);}
+  .flower-cluster .carta-flower.f1{top:6px;left:22px;width:42px;transform:rotate(-8deg);z-index:3;}
+  .flower-cluster .carta-flower.f2{top:26px;left:0;width:36px;transform:rotate(-24deg);z-index:2;}
+  .flower-cluster .carta-flower.f3{top:34px;left:38px;width:34px;transform:rotate(10deg);z-index:1;}
+  @media (max-width:900px){
+    .flower-cluster.left-out, .flower-cluster.right-out{display:none;}
+  }
+ 
+  /* ---------- PETALOS ---------- */
+  .petals{
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:5;
+  }
+  .petal{
+    position:absolute;
+    top:-5%;
+    opacity:0.8;
+    animation-name:fall;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+  }
+  .petal svg{display:block;}
+  @keyframes fall{
+    0%{transform:translateY(0) translateX(0) rotate(0deg);}
+    50%{transform:translateY(50vh) translateX(20px) rotate(180deg);}
+    100%{transform:translateY(105vh) translateX(-10px) rotate(360deg);}
   }
  
   /* ---------- SECTION HEADERS ---------- */
@@ -187,13 +326,30 @@
   #musica{background:var(--plum);}
   .music-card{
     display:flex;
+    flex-direction:column;
     align-items:center;
-    gap:24px;
+    gap:20px;
     background:rgba(246,237,225,0.04);
     border:1px solid rgba(201,161,94,0.35);
-    padding:28px 36px;
-    max-width:520px;
+    padding:28px 28px;
+    max-width:560px;
     width:100%;
+  }
+  .music-info{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    width:100%;
+  }
+  .video-wrap{
+    position:relative;
+    width:100%;
+    border-radius:2px;
+  }
+  .video-wrap iframe{
+    width:100%;
+    border:0;
+    display:block;
   }
   .vinyl{
     width:64px;
@@ -299,9 +455,55 @@
 </head>
 <body>
  
+<div class="petals" id="petals"></div>
+ 
 <section id="hero" class="section">
   <div class="eyebrow">21 · 07</div>
-  <h1 class="hero-name">Valery</h1>
+  <div class="hero-wreath">
+    <div class="wreath-rose left">
+      <svg width="50" height="68" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+        <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac)"/>
+        <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--lilac-soft)"/>
+      </svg>
+    </div>
+    <div class="wreath-rose top-left">
+      <svg width="32" height="44" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+        <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac-soft)"/>
+        <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--blush)"/>
+      </svg>
+    </div>
+    <h1 class="hero-name">Valery</h1>
+    <div class="wreath-rose bottom-left">
+      <svg width="32" height="44" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+        <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac-soft)"/>
+        <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--blush)"/>
+      </svg>
+    </div>
+    <div class="wreath-rose top-right">
+      <svg width="32" height="44" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+        <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac-soft)"/>
+        <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--blush)"/>
+      </svg>
+    </div>
+    <div class="wreath-rose bottom-right">
+      <svg width="32" height="44" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+        <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac-soft)"/>
+        <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--blush)"/>
+      </svg>
+    </div>
+    <div class="wreath-rose right">
+      <svg width="50" height="68" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+        <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac)"/>
+        <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--lilac-soft)"/>
+      </svg>
+    </div>
+  </div>
   <div class="hero-age">22 años de ti</div>
   <div class="candles">
     <div class="candle-flame"></div>
@@ -311,12 +513,74 @@
     <div class="candle-flame"></div>
   </div>
   <div class="scroll-hint">desliza ↓</div>
+ 
+  <div class="stars" id="stars"></div>
 </section>
  
 <section id="carta" class="section">
   <div class="section-eyebrow">Para ti</div>
   <h2 class="section-title">Una carta</h2>
   <div class="carta-box">
+    <div class="carta-corner tl">
+      <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4 C4 4 20 4 24 14 C28 24 14 28 8 22" stroke="#b9a3d9" stroke-width="1" fill="none"/>
+        <circle cx="10" cy="10" r="5" fill="none" stroke="#c9a15e" stroke-width="1"/>
+        <circle cx="10" cy="10" r="2" fill="#c9a15e" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="carta-corner br">
+      <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4 C4 4 20 4 24 14 C28 24 14 28 8 22" stroke="#b9a3d9" stroke-width="1" fill="none"/>
+        <circle cx="10" cy="10" r="5" fill="none" stroke="#c9a15e" stroke-width="1"/>
+        <circle cx="10" cy="10" r="2" fill="#c9a15e" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="flower-cluster left-out">
+      <div class="carta-flower f1">
+        <svg width="42" height="57" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+          <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac)"/>
+          <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--lilac-soft)"/>
+        </svg>
+      </div>
+      <div class="carta-flower f2">
+        <svg width="36" height="49" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+          <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac-soft)"/>
+          <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--blush)"/>
+        </svg>
+      </div>
+      <div class="carta-flower f3">
+        <svg width="34" height="46" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+          <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac)"/>
+          <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--lilac-soft)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="flower-cluster right-out">
+      <div class="carta-flower f1">
+        <svg width="42" height="57" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+          <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac)"/>
+          <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--lilac-soft)"/>
+        </svg>
+      </div>
+      <div class="carta-flower f2">
+        <svg width="36" height="49" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+          <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac-soft)"/>
+          <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--blush)"/>
+        </svg>
+      </div>
+      <div class="carta-flower f3">
+        <svg width="34" height="46" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>
+          <path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="var(--lilac)"/>
+          <ellipse cx="22" cy="14" rx="5" ry="4" fill="var(--lilac-soft)"/>
+        </svg>
+      </div>
+    </div>
     <p>Valery,</p>
     <p>Hoy es tu día, y aunque las cosas entre nosotros ya no son como antes, no podía dejar pasar tu cumpleaños sin decirte lo que siento. Cumplir 22 es motivo de celebración, y quiero que sepas que, estés donde estés, te deseo lo mejor del mundo.</p>
     <p>Han pasado cosas, nos hemos alejado, pero pienso en los momentos que compartimos y en todo lo bueno que construimos juntos. Te sigo queriendo, y si me das la oportunidad, me encantaría reconstruir lo que tuvimos, con más paciencia, más honestidad y más ganas de cuidarte como mereces.</p>
@@ -329,7 +593,7 @@
   <div class="section-eyebrow">Recuerdos</div>
   <h2 class="section-title">Nosotros</h2>
   <div class="gallery">
-    <div class="photo-slot"><img src="imagen/mor.jpeg"></div>
+    <div class="photo-slot"><span>Foto 1</span></div>
     <div class="photo-slot"><span>Foto 2</span></div>
     <div class="photo-slot"><span>Foto 3</span></div>
     <div class="photo-slot"><span>Foto 4</span></div>
@@ -381,6 +645,43 @@
     el.textContent = mensajes[tipo];
     el.classList.add('show');
   }
+ 
+  (function crearEstrellas(){
+    var contenedor = document.getElementById('stars');
+    if(!contenedor) return;
+    var total = 40;
+    for(var i=0;i<total;i++){
+      var estrella = document.createElement('div');
+      estrella.className = 'star';
+      estrella.style.left = (Math.random()*100) + '%';
+      estrella.style.top = (Math.random()*100) + '%';
+      estrella.style.animationDelay = (Math.random()*3) + 's';
+      var tam = 1 + Math.random()*2;
+      estrella.style.width = tam + 'px';
+      estrella.style.height = tam + 'px';
+      contenedor.appendChild(estrella);
+    }
+  })();
+ 
+  (function crearPetalos(){
+    var contenedor = document.getElementById('petals');
+    var colores = ['#b9a3d9', '#d9cdec', '#e8b4bc'];
+    var total = 16;
+    for(var i=0;i<total;i++){
+      var petalo = document.createElement('div');
+      petalo.className = 'petal';
+      var izquierda = Math.random()*100;
+      var duracion = 10 + Math.random()*10;
+      var retraso = Math.random()*15;
+      var tamano = 10 + Math.random()*10;
+      var color = colores[Math.floor(Math.random()*colores.length)];
+      petalo.style.left = izquierda + 'vw';
+      petalo.style.animationDuration = duracion + 's';
+      petalo.style.animationDelay = '-' + retraso + 's';
+      petalo.innerHTML = '<svg viewBox="0 0 20 20" width="'+tamano+'" height="'+tamano+'"><path d="M10 2 C15 2 18 6 18 10 C18 15 14 18 10 18 C6 18 2 15 2 10 C2 6 5 2 10 2 Z" fill="'+color+'" opacity="0.7"/></svg>';
+      contenedor.appendChild(petalo);
+    }
+  })();
 </script>
 </body>
 </html>

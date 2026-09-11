@@ -593,7 +593,7 @@
   <div class="section-eyebrow">Recuerdos</div>
   <h2 class="section-title">Nosotros</h2>
   <div class="gallery">
-    <div class="photo-slot"><span>Foto 1</span></div>
+    <div class="photo-slot"><img src="imagen/mor.jpeg"></div>
     <div class="photo-slot"><span>Foto 2</span></div>
     <div class="photo-slot"><span>Foto 3</span></div>
     <div class="photo-slot"><span>Foto 4</span></div>
@@ -624,7 +624,7 @@
   <h2 class="section-title">Me encantaría verte</h2>
   <p class="choice-sub">No hay presión, solo dime qué se te antoja más para celebrar tu cumpleaños.</p>
   <div class="choice-row">
-    <button class="choice-btn" onclick="elegir('cena')">Una cena</button>
+    <button class="choice-btn" onclick="elegir('cena')">Un Yape</button>
     <button class="choice-btn" onclick="elegir('llamada')">Una videollamada</button>
   </div>
   <div class="choice-response" id="choice-response"></div>
@@ -639,8 +639,8 @@
   function elegir(tipo){
     var el = document.getElementById('choice-response');
     var mensajes = {
-      cena: 'Perfecto, te escribo para coordinar el lugar y la hora.',
-      llamada: 'Perfecto, te escribo para ponernos de acuerdo en la hora.'
+      cena: 'Perfecto, ahora te envio tu Yape',
+      llamada: 'Perfecto, escribeme para o llamame estare disponible para ti todo el dia.'
     };
     el.textContent = mensajes[tipo];
     el.classList.add('show');

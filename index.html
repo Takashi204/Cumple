@@ -449,9 +449,10 @@
  
 <div class="petals" id="petals"></div>
  
-<audio id="bg-music" loop>
+<audio id="bg-music" loop style="display:none;">
   <source src="musica/cancion.mp3" type="audio/mpeg">
 </audio>
+<div id="spotify-embed-iframe" style="position:fixed;bottom:70px;right:16px;width:280px;max-width:80vw;z-index:49;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.4);"></div>
 <button id="mute-btn" class="mute-btn" aria-label="Silenciar música" title="Silenciar música">🔊</button>
  
 <section id="hero" class="section">
@@ -645,26 +646,50 @@
   }
  
   (function musicaDeFondo(){
-    var audio = document.getElementById('bg-music');
     var btn = document.getElementById('mute-btn');
-    var iniciada = false;
+    var listo = false;
+    var interactuo = false;
+    var reproduciendo = false;
     var silenciado = false;
+    var controller = null;
  
-    function iniciarMusica(){
-      if(iniciada) return;
-      iniciada = true;
-      audio.volume = 0.6;
-      audio.play().catch(function(){ /* el navegador puede bloquearlo, no pasa nada */ });
-      document.removeEventListener('click', iniciarMusica);
-      document.removeEventListener('touchstart', iniciarMusica);
+    var tag = document.createElement('script');
+    tag.src = "https://open.spotify.com/embed/iframe-api/v1";
+    document.head.appendChild(tag);
+ 
+    window.onSpotifyIframeApiReady = function(IFrameAPI){
+      var element = document.getElementById('spotify-embed-iframe');
+      var options = {
+        uri: 'spotify:track:0h9OowuDE24mx1dZPCFo7c',
+        width: '100%',
+        height: '80'
+      };
+      var callback = function(EmbedController){
+        controller = EmbedController;
+        listo = true;
+        intentarReproducir();
+      };
+      IFrameAPI.createController(element, options, callback);
+    };
+ 
+    function intentarReproducir(){
+      if(reproduciendo || !listo || !interactuo || !controller) return;
+      reproduciendo = true;
+      controller.play();
     }
-    document.addEventListener('click', iniciarMusica);
-    document.addEventListener('touchstart', iniciarMusica);
+ 
+    function marcarInteraccion(){
+      interactuo = true;
+      intentarReproducir();
+    }
+    document.addEventListener('click', marcarInteraccion);
+    document.addEventListener('touchstart', marcarInteraccion);
  
     btn.addEventListener('click', function(e){
       e.stopPropagation();
+      if(!controller) return;
       silenciado = !silenciado;
-      audio.muted = silenciado;
+      if(silenciado){ controller.pause(); } else { controller.resume(); }
       btn.textContent = silenciado ? '🔇' : '🔊';
     });
   })();

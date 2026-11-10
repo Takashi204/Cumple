@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<script>
+  // Si abren esta pagina antes del dia, vuelven a la cuenta regresiva (index.html)
+  (function(){
+    var OBJETIVO = new Date('2026-12-10T00:00:00-05:00');
+    var probar = /[?&]probar\b/.test(location.search);
+    var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    if(!probar && !local && Date.now() < OBJETIVO.getTime()){ location.replace('index.html'); }
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz cumpleaños, Valery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#2b1b2e;
+    --plum-dark:#1c1120;
+    --gold:#c9a15e;
+    --blush:#e8b4bc;
+    --rose:#d17b95;
+    --cream:#f6ede1;
+    --lilac:#b9a3d9;
+    --lilac-soft:#d9cdec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--plum-dark);
+    color:var(--cream);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  .section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:6vh 6vw;
+    position:relative;
+    text-align:center;
+  }
+ 
+  .mute-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(43,27,46,0.85);
+    border:1px solid rgba(201,161,94,0.5);
+    color:var(--cream);
+    font-size:18px;
+    cursor:pointer;
+    z-index:50;
+    backdrop-filter:blur(4px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform 0.2s ease;
+  }
+  .mute-btn:hover{transform:scale(1.08);}
+  .mute-btn:focus-visible,.choice-btn:focus-visible,.btn:focus-visible,.envelope:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:4px;
+  }
+ 
+  /* ---------- HERO ---------- */
+  #hero{
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(185,163,217,0.14), transparent 55%),
+      radial-gradient(ellipse at 50% 20%, rgba(201,161,94,0.15), transparent 60%),
+      linear-gradient(180deg, var(--plum-dark) 0%, var(--plum) 100%);
+    overflow:hidden;
+  }
+  .stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+  }
+  .star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:var(--lilac-soft);
+    animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.15;}
+    50%{opacity:0.9;}
+  }
+  #hero > *:not(.stars){
+    position:relative;
+    z-index:1;
+  }
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards 0.2s;
+  }
+  .hero-name{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:clamp(56px,12vw,140px);
+    line-height:0.95;
+    letter-spacing:0.01em;
+    color:var(--cream);
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 0.5s;
+  }
+  .hero-age{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(20px,3vw,28px);
+    color:var(--lilac-soft);
+    margin-top:14px;
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 0.9s;
+  }
+  .candles{
+    display:flex;
+    gap:10px;
+    margin-top:40px;
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 1.3s;
+  }
+  .candle-flame{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 8px 2px rgba(201,161,94,0.7);
+    animation:flicker 2.4s ease-in-out infinite;
+  }
+  .candle-flame:nth-child(odd){animation-delay:0.3s;}
+  .candle-flame:nth-child(3n){animation-delay:0.6s;}
+  @keyframes flicker{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:0.6;transform:scale(0.8);}
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom:48px;
+    font-size:12px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:rgba(246,237,225,0.5);
+    opacity:0;
+    animation:fadeUp 1s ease forwards 1.8s;
+  }
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(16px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+ 
+  .hero-wreath{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px 70px;
+    opacity:0;
+    animation:fadeUp 1.2s ease forwards 0.5s;
+  }
+  .hero-wreath .hero-name{opacity:1;animation:none;}
+  .wreath-rose{position:absolute;}
+  .wreath-rose svg{display:block;filter:drop-shadow(0 0 8px rgba(185,163,217,0.75));}
+  .wreath-rose.left{
+    left:-6px;
+    top:50%;
+    transform:translateY(-50%) rotate(-18deg);
+    width:56px;
+  }
+  .wreath-rose.right{
+    right:-6px;
+    top:50%;
+    transform:translateY(-50%) rotate(18deg) scaleX(-1);
+    width:56px;
+  }
+  .wreath-rose.top-left{
+    left:34px;
+    top:-6px;
+    width:30px;
+    transform:rotate(-25deg);
+    opacity:0.75;
+  }
+  .wreath-rose.top-right{
+    right:34px;
+    top:-6px;
+    width:30px;
+    transform:rotate(25deg) scaleX(-1);
+    opacity:0.75;
+  }
+  .wreath-rose.bottom-left{
+    left:34px;
+    bottom:-6px;
+    width:30px;
+    transform:rotate(25deg);
+    opacity:0.75;
+  }
+  .wreath-rose.bottom-right{
+    right:34px;
+    bottom:-6px;
+    width:30px;
+    transform:rotate(-25deg) scaleX(-1);
+    opacity:0.75;
+  }
+  @media (max-width:640px){
+    .hero-wreath{padding:16px 40px;}
+    .wreath-rose.left, .wreath-rose.right{width:36px;}
+    .wreath-rose.top-left, .wreath-rose.top-right, .wreath-rose.bottom-left, .wreath-rose.bottom-right{display:none;}
+  }
+ 
+  /* ---------- PETALOS ---------- */
+  .petals{
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:5;
+  }
+  .petal{
+    position:absolute;
+    top:-5%;
+    opacity:0.8;
+    animation-name:fall;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+  }
+  .petal svg{display:block;}
+  @keyframes fall{
+    0%{transform:translateY(0) translateX(0) rotate(0deg);}
+    50%{transform:translateY(50vh) translateX(20px) rotate(180deg);}
+    100%{transform:translateY(105vh) translateX(-10px) rotate(360deg);}
+  }
+ 
+  /* ---------- SECTION HEADERS ---------- */
+  .section-eyebrow{
+    font-size:12px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:16px;
+  }
+  .section-title{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:clamp(32px,5vw,52px);
+    margin-bottom:48px;
+    color:var(--cream);
+  }
+ 
+  /* ---------- CARTA ---------- */
+  #carta{background:var(--plum);}
+  .carta-heading-flower{
+    margin-bottom:14px;
+    filter:drop-shadow(0 0 9px rgba(185,163,217,0.8));
+  }
+  .carta-heading-flower svg{display:block;}
+ 
+  /* Sobre */
+  .envelope-stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:34px;
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .envelope-stage.leave{opacity:0;transform:translateY(30px) scale(0.92);}
+  .envelope{
+    position:relative;
+    width:min(340px,82vw);
+    height:min(226px,54.7vw);
+    background:#d8c19a;
+    border:1px solid rgba(201,161,94,0.7);
+    border-radius:3px;
+    cursor:pointer;
+    box-shadow:0 22px 50px rgba(0,0,0,0.5);
+    animation:floaty 4s ease-in-out infinite;
+  }
+  .envelope.open{animation:none;cursor:default;}
+  @keyframes floaty{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+  }
+  .env-paper{
+    position:absolute;
+    left:6%;right:6%;top:8%;bottom:8%;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 17px, rgba(185,163,217,0.28) 17px 18px),
+      var(--cream);
+    border-radius:2px;
+    z-index:1;
+    transition:transform 0.9s cubic-bezier(0.3,0.7,0.3,1) 0.65s;
+  }
+  .envelope.open .env-paper{transform:translateY(-62%);}
+  .env-front{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg,#f1e4cc,#dfc9a3);
+    clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);
+    z-index:2;
+  }
+  .env-flap{
+    position:absolute;
+    left:0;top:0;
+    width:100%;
+    height:56%;
+    background:linear-gradient(180deg,#e2cca6,#f1e4cc);
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top center;
+    transform:perspective(700px) rotateX(0deg);
+    transition:transform 0.8s ease, z-index 0s 0.4s;
+    z-index:3;
+  }
+  .envelope.open .env-flap{
+    transform:perspective(700px) rotateX(180deg);
+    z-index:0;
+  }
+  .env-seal{
+    position:absolute;
+    left:50%;top:56%;
+    transform:translate(-50%,-50%);
+    width:46px;height:46px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#e08aa3,#a8456a);
+    box-shadow:0 3px 8px rgba(0,0,0,0.35);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:22px;
+    color:var(--cream);
+    z-index:4;
+    transition:opacity 0.3s ease;
+  }
+  .envelope.open .env-seal{opacity:0;pointer-events:none;}
+  .env-hint{
+    font-size:12px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    animation:pulse 2.4s ease-in-out infinite;
+    transition:opacity 0.4s ease;
+  }
+  .env-hint.hide{opacity:0;animation:none;}
+  @keyframes pulse{
+    0%,100%{opacity:0.5;}
+    50%{opacity:1;}
+  }
+ 
+  /* Carta abierta */
+  .carta-box{
+    display:none;
+    position:relative;
+    max-width:620px;
+    width:100%;
+    background:rgba(246,237,225,0.04);
+    border:1px solid rgba(201,161,94,0.35);
+    border-radius:2px;
+    padding:52px 44px;
+    text-align:left;
+  }
+  .carta-box.show{
+    display:block;
+    animation:boxIn 1s ease both;
+  }
+  @keyframes boxIn{
+    from{opacity:0;transform:translateY(24px) scale(0.96);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .carta-box p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(18px,2.4vw,22px);
+    line-height:1.75;
+    color:var(--cream);
+    margin-bottom:22px;
+  }
+  .carta-box p.carta-firma{
+    font-style:italic;
+    color:var(--lilac-soft);
+    margin-top:12px;
+    margin-bottom:0;
+    text-align:right;
+  }
+  .tw-w{display:inline-block;white-space:nowrap;}
+  .tw-ch{opacity:0;transition:opacity 0.3s ease;}
+  .tw-ch.on{opacity:1;}
+ 
+  .carta-corner{
+    position:absolute;
+    width:54px;
+    height:54px;
+    opacity:0;
+    transition:opacity 1.2s ease 0.4s;
+  }
+  .carta-box.bloom .carta-corner{opacity:0.55;}
+  .carta-corner svg{width:100%;height:100%;}
+  .carta-corner.tl{top:-14px;left:-14px;}
+  .carta-corner.br{bottom:-14px;right:-14px;transform:rotate(180deg);}
+ 
+  /* Flores que florecen al abrir la carta */
+  .flower-cluster{
+    position:absolute;
+    top:50%;
+    width:90px;
+    height:90px;
+  }
+  .flower-cluster.left-out{left:-85px;transform:translateY(-50%);}
+  .flower-cluster.right-out{right:-85px;transform:translateY(-50%) scaleX(-1);}
+  .carta-flower{
+    position:absolute;
+    --r:0deg;
+    opacity:0;
+    transform:rotate(var(--r)) scale(0);
+    transform-origin:50% 100%;
+    filter:drop-shadow(0 0 8px rgba(185,163,217,0.75));
+    transition:transform 1.2s cubic-bezier(0.2,1.5,0.4,1), opacity 0.6s ease;
+  }
+  .carta-flower svg{display:block;}
+  .carta-box.bloom .carta-flower{opacity:1;transform:rotate(var(--r)) scale(1);}
+  .carta-flower.f1{top:6px;left:22px;--r:-8deg;z-index:3;transition-delay:0.15s;}
+  .carta-flower.f2{top:26px;left:0;--r:-24deg;z-index:2;transition-delay:0.4s;}
+  .carta-flower.f3{top:34px;left:38px;--r:10deg;z-index:1;transition-delay:0.65s;}
+  .right-out .carta-flower.f1{transition-delay:0.3s;}
+  .right-out .carta-flower.f2{transition-delay:0.55s;}
+  .right-out .carta-flower.f3{transition-delay:0.8s;}
+ 
+  @media (max-width:900px){
+    .carta-corner{display:none;}
+    .flower-cluster{top:-46px;}
+    .flower-cluster.left-out{left:-14px;transform:scale(0.6);transform-origin:top left;}
+    .flower-cluster.right-out{right:-14px;transform:scale(-0.6,0.6);transform-origin:top right;}
+  }
+  @media (max-width:640px){
+    .carta-box{padding:44px 26px;}
+  }
+ 
+  /* Petalos que salen al abrir */
+  .burst-p{
+    position:absolute;
+    left:50%;top:30%;
+    pointer-events:none;
+    animation:burst 1.8s ease-out forwards;
+    z-index:6;
+  }
+  @keyframes burst{
+    from{opacity:1;transform:translate(0,0) rotate(0deg) scale(0.4);}
+    to{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(1);}
+  }
+ 
+  /* ---------- FOTOS ---------- */
+  #fotos{background:var(--plum-dark);}
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    max-width:900px;
+    width:100%;
+  }
+  .photo-slot{
+    aspect-ratio:1/1;
+    background:rgba(246,237,225,0.05);
+    border:1px dashed rgba(201,161,94,0.4);
+    border-radius:2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .photo-slot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  @media (max-width:640px){
+    .gallery{grid-template-columns:repeat(2,1fr);}
+  }
+ 
+  /* ---------- VIDEO ---------- */
+  #video-seccion{background:var(--plum);}
+  .video-player-wrap{
+    max-width:560px;
+    width:100%;
+    border:1px solid rgba(201,161,94,0.35);
+    border-radius:4px;
+    overflow:hidden;
+    background:rgba(246,237,225,0.04);
+    padding:12px;
+  }
+  .video-player-wrap video{
+    width:100%;
+    border-radius:2px;
+    display:block;
+  }
+ 
+  /* ---------- ELECCION ---------- */
+  #eleccion{background:var(--plum-dark);}
+  .choice-sub{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(17px,2.2vw,20px);
+    color:rgba(246,237,225,0.75);
+    max-width:480px;
+    margin-bottom:36px;
+  }
+  .choice-row{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .choice-btn{
+    font-family:'Jost',sans-serif;
+    font-size:13px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--cream);
+    background:transparent;
+    border:1px solid var(--lilac);
+    padding:16px 34px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .choice-btn:hover{
+    background:var(--lilac);
+    color:var(--plum-dark);
+    transform:translateY(-2px);
+  }
+  .choice-response{
+    margin-top:32px;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(18px,2.4vw,22px);
+    color:var(--lilac-soft);
+    opacity:0;
+    transition:opacity 0.5s ease;
+    min-height:28px;
+  }
+  .choice-response.show{opacity:1;}
+ 
+  /* ---------- CIERRE ---------- */
+  #cierre{
+    background:linear-gradient(180deg, var(--plum) 0%, var(--plum-dark) 100%);
+  }
+  .cierre-msg{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(24px,3.6vw,36px);
+    max-width:640px;
+    line-height:1.5;
+    color:var(--cream);
+    margin-bottom:36px;
+  }
+  .btn{
+    display:inline-block;
+    font-family:'Jost',sans-serif;
+    font-size:13px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--plum-dark);
+    background:var(--gold);
+    padding:16px 38px;
+    border:none;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform 0.3s ease, background 0.3s ease;
+    text-decoration:none;
+  }
+  .btn:hover{
+    background:var(--blush);
+    transform:translateY(-2px);
+  }
+ 
+  /* ---------- LUCESITAS ---------- */
+  .luces{
+    position:absolute;
+    top:0;left:0;
+    width:100%;
+    height:60px;
+    pointer-events:none;
+  }
+  .luces svg{position:absolute;inset:0;width:100%;height:100%;}
+  .luces path{
+    fill:none;
+    stroke:rgba(201,161,94,0.55);
+    stroke-width:1;
+    vector-effect:non-scaling-stroke;
+  }
+  .luz{
+    position:absolute;
+    width:9px;height:9px;
+    margin:-4px 0 0 -4px;
+    border-radius:50%;
+    background:var(--c);
+    box-shadow:0 0 10px 3px var(--c);
+    animation:luz 2.8s ease-in-out infinite;
+  }
+  @keyframes luz{
+    0%,100%{opacity:0.35;transform:scale(0.85);}
+    50%{opacity:1;transform:scale(1.1);}
+  }
+ 
+ 
+</style>
+</head>
+<body>
+ 
+<div class="petals" id="petals"></div>
+ 
+<audio id="bg-music" loop style="display:none;">
+  <source src="musica/cancion.mp3" type="audio/mpeg">
+</audio>
+<div id="spotify-embed-iframe" style="position:fixed;bottom:70px;right:16px;width:280px;max-width:80vw;z-index:49;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.4);"></div>
+<button id="mute-btn" class="mute-btn" aria-label="Silenciar música" title="Silenciar música">🔊</button>
+ 
+<section id="hero" class="section">
+  <div class="eyebrow">10 · 12</div>
+  <div class="hero-wreath">
+    <div class="wreath-rose left"><span data-flor="50,a"></span></div>
+    <div class="wreath-rose top-left"><span data-flor="32,b"></span></div>
+    <h1 class="hero-name">Valery</h1>
+    <div class="wreath-rose bottom-left"><span data-flor="32,b"></span></div>
+    <div class="wreath-rose top-right"><span data-flor="32,b"></span></div>
+    <div class="wreath-rose bottom-right"><span data-flor="32,b"></span></div>
+    <div class="wreath-rose right"><span data-flor="50,a"></span></div>
+  </div>
+  <div class="hero-age">22 años de ti</div>
+  <div class="candles">
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+    <div class="candle-flame"></div>
+  </div>
+  <div class="scroll-hint">desliza ↓</div>
+ 
+  <div class="stars" id="stars"></div>
+</section>
+ 
+<section id="carta" class="section">
+  <div class="section-eyebrow">Para ti</div>
+  <div class="carta-heading-flower"><span data-flor="40,a"></span></div>
+  <h2 class="section-title">Una carta</h2>
+ 
+  <!-- Sobre cerrado -->
+  <div class="envelope-stage" id="env-stage">
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Abrir la carta">
+      <div class="env-paper"></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">V</div>
+    </div>
+    <p class="env-hint" id="env-hint">Toca el sobre para abrirlo</p>
+  </div>
+ 
+  <!-- Carta abierta -->
+  <div class="carta-box" id="carta-box">
+    <div class="carta-corner tl">
+      <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4 C4 4 20 4 24 14 C28 24 14 28 8 22" stroke="#b9a3d9" stroke-width="1" fill="none"/>
+        <circle cx="10" cy="10" r="5" fill="none" stroke="#c9a15e" stroke-width="1"/>
+        <circle cx="10" cy="10" r="2" fill="#c9a15e" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="carta-corner br">
+      <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4 C4 4 20 4 24 14 C28 24 14 28 8 22" stroke="#b9a3d9" stroke-width="1" fill="none"/>
+        <circle cx="10" cy="10" r="5" fill="none" stroke="#c9a15e" stroke-width="1"/>
+        <circle cx="10" cy="10" r="2" fill="#c9a15e" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="flower-cluster left-out">
+      <div class="carta-flower f1"><span data-flor="42,a"></span></div>
+      <div class="carta-flower f2"><span data-flor="36,b"></span></div>
+      <div class="carta-flower f3"><span data-flor="34,a"></span></div>
+    </div>
+    <div class="flower-cluster right-out">
+      <div class="carta-flower f1"><span data-flor="42,a"></span></div>
+      <div class="carta-flower f2"><span data-flor="36,b"></span></div>
+      <div class="carta-flower f3"><span data-flor="34,a"></span></div>
+    </div>
+    <div id="carta-texto"></div>
+  </div>
+</section>
+ 
+<section id="fotos" class="section">
+  <div class="section-eyebrow">Recuerdos</div>
+  <h2 class="section-title">Nosotros</h2>
+  <div class="gallery">
+    <div class="photo-slot"><img src="imagen/mor.jpeg" alt=""></div>
+    <div class="photo-slot"><img src="imagen/ChatGPT%20Image%2012%20sept%202026,%2001_43_55.png" alt=""></div>
+    <div class="photo-slot"><img src="imagen/4b23e7ac-9353-4e1b-ba3c-7e64d22a6d30.jpg" alt=""></div>
+    <div class="photo-slot"><img src="imagen/4cfa6021-3ccd-441b-8f0d-6db7d84b01e8.jpg" alt=""></div>
+    <div class="photo-slot"><img src="imagen/cbe6f6f0-1dfa-487b-be4c-1b53bb3e2c70.jpg" alt=""></div>
+    <div class="photo-slot"><img src="imagen/da2223f3-f36e-4795-b84b-5451cbfd98d8.jpg" alt=""></div>
+  </div>
+</section>
+ 
+<section id="video-seccion" class="section">
+  <div class="section-eyebrow">Un momento</div>
+  <h2 class="section-title">Un video para ti</h2>
+  <div class="video-player-wrap">
+    <video controls playsinline>
+      <source src="video/mi-video.mp4" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+  </div>
+</section>
+ 
+<section id="eleccion" class="section">
+  <div class="section-eyebrow">Si tú quieres</div>
+  <h2 class="section-title">Me encantaría verte</h2>
+  <p class="choice-sub">No hay presión, solo dime qué se te antoja más para celebrar tu cumpleaños.</p>
+  <div class="choice-row">
+    <button class="choice-btn" onclick="elegir('cena')">Un Yape</button>
+    <button class="choice-btn" onclick="elegir('llamada')">Una videollamada</button>
+  </div>
+  <div class="choice-response" id="choice-response"></div>
+</section>
+ 
+<section id="cierre" class="section">
+  <div class="luces" id="luces" aria-hidden="true"></div>
+  <p class="cierre-msg" id="cierre-msg"></p>
+  <a class="btn" href="#hero">Volver a empezar</a>
+</section>
+ 
+<script>
+  /* =========================================================
+     ELIGE LA VERSION DE LA CARTA: 'A' o 'B'
+     (para probar la otra sin editar, abre index.html?v=b)
+     ========================================================= */
+  var VERSION_POR_DEFECTO = 'A';
+ 
+  var CARTAS = {
+    A: {
+      parrafos: [
+        'Valery,',
+        'Hoy cumples 22 y no quise dejar pasar el día sin decirte algo desde el cariño. Sé que las cosas entre nosotros ya no son como antes, y aun así hay cosas de ti que siguen en mi memoria con mucho aprecio.',
+        'Pienso en lo bueno que compartimos y en lo mucho que aprendí a tu lado. Si algún día tienes ganas de hablar, de tomar un café o simplemente de saber cómo estoy, aquí voy a estar, sin apuro y sin presión.',
+        'Que este año te llene de cosas bonitas, de gente que te cuide y de todo lo que te mereces. Feliz cumpleaños.'
+      ],
+      firma: 'Con todo mi cariño.',
+      cierre: 'Feliz cumpleaños, Valery.<br>Que este nuevo año te encuentre feliz y rodeada de todo lo que quieres.'
+    },
+    B: {
+      parrafos: [
+        'Valery,',
+        'Hoy cumples 22 y quería escribirte algo sincero. Gracias por los momentos que compartimos, por lo que me enseñaste y por todo lo bueno que dejaste en mí, aunque nuestro camino haya cambiado.',
+        'Te recuerdo con cariño y te deseo, de corazón, un año lleno de alegrías, de tranquilidad y de personas que te quieran como mereces. Mereces celebrar en grande.',
+        'No espero nada a cambio de este mensaje. Solo quería que supieras que hoy pensé en ti con mucho cariño.'
+      ],
+      firma: 'Con cariño.',
+      cierre: 'Feliz cumpleaños, Valery.<br>Que este nuevo año te encuentre feliz.'
+    }
+  };
+ 
+  var parametros = new URLSearchParams(window.location.search);
+  var VERSION = (parametros.get('v') || VERSION_POR_DEFECTO).toUpperCase();
+  if(!CARTAS[VERSION]) VERSION = 'A';
+  document.getElementById('cierre-msg').innerHTML = CARTAS[VERSION].cierre;
+ 
+  var reducirMovimiento = false;
+ 
+  /* ---------- Flores (SVG) ---------- */
+  function flor(w, v){
+    var h = Math.round(w * 1.364);
+    var relleno = v === 'a' ? '#b9a3d9' : '#d9cdec';
+    var centro  = v === 'a' ? '#d9cdec' : '#e8b4bc';
+    return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 44 60" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M22 60 L22 26" stroke="#7a5e99" stroke-width="2"/>' +
+      '<path d="M22 26 C10 26 4 18 4 10 C4 4 10 0 14 4 C16 6 22 14 22 14 C22 14 28 6 30 4 C34 0 40 4 40 10 C40 18 34 26 22 26Z" fill="'+relleno+'"/>' +
+      '<ellipse cx="22" cy="14" rx="5" ry="4" fill="'+centro+'"/></svg>';
+  }
+  document.querySelectorAll('[data-flor]').forEach(function(el){
+    var p = el.getAttribute('data-flor').split(',');
+    el.outerHTML = flor(parseInt(p[0], 10), p[1]);
+  });
+ 
+  /* ---------- Eleccion ---------- */
+  /* =========================================================
+     AVISO POR CORREO (Web3Forms)
+     1) Entra a web3forms.com, escribe tu correo y te llega una clave
+     2) Pega esa clave aquí abajo
+     ========================================================= */
+  var WEB3FORMS_CLAVE = 'd4d59fdb-ce24-4567-bc4c-e569abc3b2e9';
+  var ultimoAviso = '';
+ 
+  function avisar(tipo){
+    if(WEB3FORMS_CLAVE.indexOf('CAMBIA-ESTO') === 0 || tipo === ultimoAviso) return;
+    ultimoAviso = tipo;
+    var textos = {
+      cena: 'Valery eligió: Un Yape 💜',
+      llamada: 'Valery eligió: Videollamada 💜'
+    };
+    try{
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify({
+          access_key: WEB3FORMS_CLAVE,
+          subject: textos[tipo],
+          from_name: 'Pagina de cumpleaños',
+          message: textos[tipo]
+        })
+      }).catch(function(){});
+    }catch(e){}
+  }
+ 
+  function elegir(tipo){
+    var el = document.getElementById('choice-response');
+    var mensajes = {
+      cena: 'Perfecto, ahora te envio tu Yape',
+      llamada: 'Perfecto, escribeme para llamarte estare disponible para ti todo el dia.'
+    };
+    el.textContent = mensajes[tipo];
+    el.classList.add('show');
+    avisar(tipo);
+  }
+ 
+  /* ---------- Musica ---------- */
+  (function musicaDeFondo(){
+    var btn = document.getElementById('mute-btn');
+    var listo = false;
+    var interactuo = false;
+    var reproduciendo = false;
+    var silenciado = false;
+    var controller = null;
+ 
+    var tag = document.createElement('script');
+    tag.src = "https://open.spotify.com/embed/iframe-api/v1";
+    document.head.appendChild(tag);
+ 
+    window.onSpotifyIframeApiReady = function(IFrameAPI){
+      var element = document.getElementById('spotify-embed-iframe');
+      var options = {
+        uri: 'spotify:track:5qWf1WJSGYDCdRQSCdE9Wg',
+        width: '100%',
+        height: '80'
+      };
+      var callback = function(EmbedController){
+        controller = EmbedController;
+        listo = true;
+        intentarReproducir();
+      };
+      IFrameAPI.createController(element, options, callback);
+    };
+ 
+    function intentarReproducir(){
+      if(reproduciendo || !listo || !interactuo || !controller) return;
+      reproduciendo = true;
+      controller.play();
+    }
+ 
+    function marcarInteraccion(){
+      interactuo = true;
+      intentarReproducir();
+    }
+    document.addEventListener('click', marcarInteraccion);
+    document.addEventListener('touchstart', marcarInteraccion);
+ 
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(!controller) return;
+      silenciado = !silenciado;
+      if(silenciado){ controller.pause(); } else { controller.resume(); }
+      btn.textContent = silenciado ? '🔇' : '🔊';
+    });
+  })();
+ 
+  /* ---------- Estrellas ---------- */
+  (function crearEstrellas(){
+    var contenedor = document.getElementById('stars');
+    if(!contenedor) return;
+    for(var i=0;i<40;i++){
+      var estrella = document.createElement('div');
+      estrella.className = 'star';
+      estrella.style.left = (Math.random()*100) + '%';
+      estrella.style.top = (Math.random()*100) + '%';
+      estrella.style.animationDelay = (Math.random()*3) + 's';
+      var tam = 1 + Math.random()*2;
+      estrella.style.width = tam + 'px';
+      estrella.style.height = tam + 'px';
+      contenedor.appendChild(estrella);
+    }
+  })();
+ 
+  /* ---------- Petalos que caen ---------- */
+  (function crearPetalos(){
+    var contenedor = document.getElementById('petals');
+    var colores = ['#b9a3d9', '#d9cdec', '#e8b4bc'];
+    for(var i=0;i<16;i++){
+      var petalo = document.createElement('div');
+      petalo.className = 'petal';
+      var duracion = 10 + Math.random()*10;
+      var retraso = Math.random()*15;
+      var tamano = 10 + Math.random()*10;
+      var color = colores[Math.floor(Math.random()*colores.length)];
+      petalo.style.left = (Math.random()*100) + 'vw';
+      petalo.style.animationDuration = duracion + 's';
+      petalo.style.animationDelay = '-' + retraso + 's';
+      petalo.innerHTML = '<svg viewBox="0 0 20 20" width="'+tamano+'" height="'+tamano+'"><path d="M10 2 C15 2 18 6 18 10 C18 15 14 18 10 18 C6 18 2 15 2 10 C2 6 5 2 10 2 Z" fill="'+color+'" opacity="0.7"/></svg>';
+      contenedor.appendChild(petalo);
+    }
+  })();
+ 
+  /* ---------- Guirnalda de lucesitas ---------- */
+  (function crearLuces(){
+    var cont = document.getElementById('luces');
+    if(!cont) return;
+    var tramos = 9, ancho = 1000, caida = 36, base = 6;
+    var d = 'M0 ' + base;
+    var colores = ['#d9cdec', '#c9a15e', '#e8b4bc', '#b9a3d9'];
+    var bombillas = '';
+    for(var k = 0; k < tramos; k++){
+      var x0 = k * ancho / tramos, x1 = (k + 1) * ancho / tramos;
+      var xm = (x0 + x1) / 2;
+      d += ' Q' + xm + ' ' + (base + caida) + ' ' + x1 + ' ' + base;
+      var c = colores[k % colores.length];
+      bombillas += '<div class="luz" style="left:' + (xm / ancho * 100) + '%;top:' + (base + caida / 2) +
+        'px;--c:' + c + ';animation-delay:' + (k * 0.35).toFixed(2) + 's"></div>';
+    }
+    cont.innerHTML = '<svg viewBox="0 0 ' + ancho + ' 60" preserveAspectRatio="none"><path d="' + d + '"/></svg>' + bombillas;
+  })();
+ 
+  /* ---------- Sobre -> carta -> escritura ---------- */
+  var sobre = document.getElementById('envelope');
+  var escenario = document.getElementById('env-stage');
+  var pista = document.getElementById('env-hint');
+  var caja = document.getElementById('carta-box');
+  var abierta = false;
+  var saltar = false;
+ 
+  function petalosAlAbrir(){
+    var colores = ['#b9a3d9', '#d9cdec', '#e8b4bc'];
+    for(var i=0;i<22;i++){
+      var p = document.createElement('div');
+      p.className = 'burst-p';
+      var ang = Math.random() * Math.PI * 2;
+      var dist = 90 + Math.random() * 180;
+      p.style.setProperty('--dx', Math.round(Math.cos(ang) * dist) + 'px');
+      p.style.setProperty('--dy', Math.round(Math.sin(ang) * dist - 40) + 'px');
+      p.style.setProperty('--rot', Math.round(Math.random() * 540 - 270) + 'deg');
+      p.style.animationDelay = (Math.random() * 0.25) + 's';
+      var t = 10 + Math.random() * 10;
+      var c = colores[Math.floor(Math.random() * colores.length)];
+      p.innerHTML = '<svg viewBox="0 0 20 20" width="'+t+'" height="'+t+'"><path d="M10 2 C15 2 18 6 18 10 C18 15 14 18 10 18 C6 18 2 15 2 10 C2 6 5 2 10 2 Z" fill="'+c+'" opacity="0.85"/></svg>';
+      caja.appendChild(p);
+      setTimeout((function(el){ return function(){ el.remove(); }; })(p), 2400);
+    }
+  }
+ 
+  function prepararTexto(){
+    var cont = document.getElementById('carta-texto');
+    var carta = CARTAS[VERSION];
+    var lineas = carta.parrafos.concat([carta.firma]);
+    var todas = [];
+    lineas.forEach(function(texto, idx){
+      var p = document.createElement('p');
+      if(idx === lineas.length - 1) p.className = 'carta-firma';
+      p.setAttribute('aria-label', texto);
+      texto.split(' ').forEach(function(palabra, i, arr){
+        var w = document.createElement('span');
+        w.className = 'tw-w';
+        w.setAttribute('aria-hidden', 'true');
+        palabra.split('').forEach(function(letra){
+          var s = document.createElement('span');
+          s.className = 'tw-ch';
+          s.textContent = letra;
+          w.appendChild(s);
+          todas.push({el: s, fin: false});
+        });
+        p.appendChild(w);
+        if(i < arr.length - 1) p.appendChild(document.createTextNode(' '));
+      });
+      if(todas.length) todas[todas.length - 1].fin = true;
+      cont.appendChild(p);
+    });
+    return todas;
+  }
+ 
+  function escribir(letras){
+    if(reducirMovimiento){
+      letras.forEach(function(l){ l.el.classList.add('on'); });
+      return;
+    }
+    var i = 0;
+    function paso(){
+      if(saltar){
+        for(; i < letras.length; i++) letras[i].el.classList.add('on');
+        return;
+      }
+      if(i >= letras.length) return;
+      var l = letras[i++];
+      l.el.classList.add('on');
+      var texto = l.el.textContent;
+      var espera = Math.max(10, Math.min(26, 38000 / letras.length));
+      if(texto === ',' ) espera = 160;
+      if(texto === '.' ) espera = 320;
+      if(l.fin) espera = 650;
+      setTimeout(paso, espera);
+    }
+    paso();
+  }
+ 
+  function abrirCarta(){
+    if(abierta) return;
+    abierta = true;
+    var letras = prepararTexto();
+    sobre.classList.add('open');
+    sobre.removeAttribute('tabindex');
+    sobre.setAttribute('aria-label', 'Carta abierta');
+    pista.classList.add('hide');
+ 
+    var t1 = reducirMovimiento ? 100 : 1900;
+    var t2 = reducirMovimiento ? 200 : 2600;
+    setTimeout(function(){ escenario.classList.add('leave'); }, t1);
+    setTimeout(function(){
+      escenario.style.display = 'none';
+      caja.classList.add('show');
+      if(!reducirMovimiento) petalosAlAbrir();
+      setTimeout(function(){ caja.classList.add('bloom'); }, 250);
+      setTimeout(function(){ escribir(letras); }, reducirMovimiento ? 0 : 1500);
+    }, t2);
+  }
+ 
+  sobre.addEventListener('click', abrirCarta);
+  sobre.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); abrirCarta(); }
+  });
+  // Tocar la carta mientras se escribe muestra todo el texto de una vez
+  caja.addEventListener('click', function(){ saltar = true; });
+</script>
+</body>
+</html>
+ 
+
+
+
+
+
+
+
+
+Claud
